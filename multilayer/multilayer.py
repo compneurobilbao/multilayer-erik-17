@@ -34,13 +34,16 @@ img2_data[img2_data < -0.5] = 1
 
 
 
-# count img1
-img1_count = np.count_nonzero(img1_data)
+# count all
+logical_or = np.logical_or(np.ndarray.flatten(img1_data),
+                             np.ndarray.flatten(img2_data))
+count_all = np.count_nonzero(logical_or)
 
-
+# count intersection
 logical_and = np.logical_and(np.ndarray.flatten(img1_data),
                              np.ndarray.flatten(img2_data))
 
 count_overlap = np.count_nonzero(logical_and)
 
-overlap_ratio_perc = count_overlap/img1_count*100
+# sorensen index
+overlap_ratio_perc = count_overlap/count_all*100
